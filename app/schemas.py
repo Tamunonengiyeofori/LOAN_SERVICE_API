@@ -2,85 +2,78 @@ from __future__ import annotations
 from pydantic import BaseModel, EmailStr, constr
 from typing import Optional, List, ForwardRef
 from datetime import datetime
+from app.models import LoanType
+
+ 
+
 
 
 # USER VALIDATION SCHEMAS
-class UserBase(BaseModel):
-    email : EmailStr
-    is_active: bool = False
-    is_admin: bool = False
-    profile: Optional[UserProfileOut] = None
-       
-    class Config:
-        orm_mode = True    
-
-# class UserOut(BaseModel):
-#     id: Optional[int]
-
-class UserCreate(UserBase):
+class UserCreate(BaseModel):
+    email: EmailStr
+    is_admin: Optional[bool] = False
+    is_active: Optional[bool] = False
     password: str
     
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+    
+
+# LOAN VALIDATION SCHEMAS
+class LoanCreate(BaseModel):
+    amount: int
+    type: LoanType 
+    description: str
 
 
-class UserOut(UserBase):
-    id : int
-    created_at: datetime
 
-
-LoanResponse = ForwardRef("LoanResponse")
-# USER PROFILE VALIDATION SCHEMAS
-class UserProfileBase(BaseModel):
-    loans: Optional[LoanResponse] = None
+class LoanResponse(BaseModel):
+    id: int
+    payment_status: int
+    date_paid: Optional[datetime] = None
+    created_at : datetime
+    updated_at: Optional[datetime] = None
+    owner_id: int
+    owner: Optional[UserOut] = None
+    
     class Config:
         orm_mode = True
-        
-UserProfileBase.update_forward_refs()
 
 
+
+
+class UserOut(BaseModel):
+    id : int
+    email : EmailStr
+    is_active: bool = False
+    is_admin: bool = False
+    created_at: datetime
+    profile: Optional[UserProfileOut] = None
+    loans: Optional[List[LoanResponse]] = None
+    class Config:
+        orm_mode = True  
+
+
+
+# USER PROFILE VALIDATION SCHEMAS
 class UserProfileCreate(BaseModel):
     name: str
     gender: str
     address: str
     mobile: constr(min_length=11)
 
-UserOut =  ForwardRef("UserOut")
 
-class UserProfileOut(UserProfileBase):
+class UserProfileOut(BaseModel):
     id: int
     created_at: datetime
-    updated_at: Optional[datetime]
-    owner_id: int
-    owner: UserOut
-    
-UserProfileOut.update_forward_refs()
-
-
-# LOAN VALIDATION SCHEMAS
-class LoanBase(BaseModel):
-    payment_status: int
-    duration: int
-    description: str
-    date_paid: Optional[datetime] = None
-    class Config:
-        orm_mode = True
-        
-class LoanCreate(BaseModel):
-    amount: int
-    type: int
-    description: str
- 
-class LoanResponse(BaseModel):
-    id: int
-    created_at : datetime
     updated_at: Optional[datetime] = None
     owner_id: int
-    owner: UserProfileOut
-    
-    
-    
+    owner: Optional[UserOut] = None
+
+
+
+
 class Token(BaseModel):
     access_token: str
     token_type: str

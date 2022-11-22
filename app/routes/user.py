@@ -12,7 +12,7 @@ user_router = APIRouter(
 )
 
 # Create a User
-@user_router.post("/signup", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
+@user_router.post("/signup", status_code=status.HTTP_201_CREATED)
 def create_user(user:schemas.UserCreate, db:Session = Depends(get_db)):
     user_email = db.query(models.User).filter(models.User.email == user.email).first()
     if user_email is not None:
@@ -28,7 +28,7 @@ def create_user(user:schemas.UserCreate, db:Session = Depends(get_db)):
 
 
 # Get all of the users
-@user_router.get("/", response_model=List[schemas.UserOut], status_code=status.HTTP_200_OK)
+@user_router.get("/", status_code=status.HTTP_200_OK)
 def get_all_users(db: Session = Depends(get_db), 
                   curent_user: int = Depends(Oauth2.get_current_user)
                   ):

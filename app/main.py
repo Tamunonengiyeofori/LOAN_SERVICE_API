@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.routes.user import user_router
 from app.routes.auth import auth_router
 from app.routes.profile import profile_router
+from app.routes.loan import loan_router
 # from fastapi_jwt_auth import AuthJWT
 
 
@@ -18,6 +19,7 @@ from .config import settings
 app.include_router(user_router)
 app.include_router(auth_router)
 app.include_router(profile_router)
+app.include_router(loan_router)
 # if __name__ == '__main__':
 #     uvicorn.run("main:app", host="localhost", port=8000)
 
