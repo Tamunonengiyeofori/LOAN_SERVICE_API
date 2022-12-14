@@ -35,7 +35,6 @@ async def create_startup_admin():
         session.add(new_user)
         ADMIN_USER = new_user.email
         session.commit()
-        print(ADMIN_USER)
         session.refresh(new_user)
         
 #Delete admin at server shutdown
