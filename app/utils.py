@@ -8,3 +8,4 @@ def verify_password(plain_pswd, hashed_pswd):
 
 def hash_passowrd(password:str):
     return pswd_context.hash(password)
+

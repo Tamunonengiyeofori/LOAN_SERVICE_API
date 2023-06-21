@@ -23,6 +23,6 @@ app.include_router(loan_router)
 # if __name__ == '__main__':
 #     uvicorn.run("main:app", host="localhost", port=8000)
 
-app.get("/")
+@app.get("/")
 def root():
     return{"message":"WELCOME TO THE LOAN SERVICE API "}

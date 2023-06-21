@@ -9,6 +9,7 @@ loan_router = APIRouter(
     prefix="/loans",
     tags = ["Loans"]
 )
+from app.models import PaymentStatus
 
 @loan_router.post("/",status_code=status.HTTP_201_CREATED)
 def create_loan(loan:schemas.LoanCreate,
@@ -26,3 +27,8 @@ def create_loan(loan:schemas.LoanCreate,
         status_code=status.HTTP_400_BAD_REQUEST,
         detail="You Can't take more than 1 loans at a time"
     )
+    
+def update_loan_status(db:Session = Depends(get_db), current_user: int = Depends(Oauth2.get_current_user)):
+    loan_taker = db.query(models.User).filter(models.User.id  == current_user.id)
+    loan_taker.loans.payment_status == PaymentStatus.PAID
+    return {"message": f"Your {str(loan_taker.loans.type)} loan has been paid and you are now debt free"}
