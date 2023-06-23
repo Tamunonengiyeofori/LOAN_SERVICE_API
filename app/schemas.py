@@ -71,9 +71,6 @@ class UserProfileOut(BaseModel):
     owner_id: int
     owner: Optional[UserOut] = None
 
-
-
-
 class Token(BaseModel):
     access_token: str
     token_type: str
