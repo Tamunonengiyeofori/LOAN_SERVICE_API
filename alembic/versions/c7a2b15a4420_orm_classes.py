@@ -1,8 +1,8 @@
-"""First Models
+"""ORM CLASSES
 
-Revision ID: 1f1b9e598334
+Revision ID: c7a2b15a4420
 Revises: 
-Create Date: 2022-11-21 12:04:51.701485
+Create Date: 2023-06-23 19:37:08.276697
 
 """
 from alembic import op
@@ -11,7 +11,7 @@ import sqlalchemy_utils
 from app.models import LoanType, PaymentStatus
 
 # revision identifiers, used by Alembic.
-revision = '1f1b9e598334'
+revision = 'c7a2b15a4420'
 down_revision = None
 branch_labels = None
 depends_on = None
