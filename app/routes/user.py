@@ -1,7 +1,7 @@
-from .. import models, schemas
+import models, schemas
 from fastapi import FastAPI, status, HTTPException, Depends, APIRouter, Response
-from ..database import get_db, engine
-from .. import models, utils, Oauth2
+from database import get_db, engine
+import models, utils, Oauth2
 from sqlalchemy.orm import Session
 from typing import List
 from faker import Faker

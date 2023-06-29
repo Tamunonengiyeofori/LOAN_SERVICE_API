@@ -2,7 +2,7 @@ from __future__ import annotations
 from pydantic import BaseModel, EmailStr, constr
 from typing import Optional, List, ForwardRef
 from datetime import datetime
-from app.models import LoanType
+from models import LoanType
 
  
 

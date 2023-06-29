@@ -1,15 +1,15 @@
 from fastapi import FastAPI
-from app.routes.user import user_router
-from app.routes.auth import auth_router
-from app.routes.profile import profile_router
-from app.routes.loan import loan_router
+from routes.user import user_router
+from routes.auth import auth_router
+from routes.profile import profile_router
+from routes.loan import loan_router
 # from fastapi_jwt_auth import AuthJWT
 
 
 # create an instance of the fastapi class
 app = FastAPI()
 
-from .config import settings
+from config import settings
 
 # @AuthJWT.load_config
 # def get_config():

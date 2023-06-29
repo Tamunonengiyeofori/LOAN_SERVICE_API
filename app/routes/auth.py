@@ -2,9 +2,9 @@ from urllib import response
 from fastapi import APIRouter
 from fastapi.security import OAuth2PasswordRequestForm
 import sqlalchemy
-from .. import Oauth2
-from .. import utils
-from .. import schemas, database, models
+import Oauth2
+import utils
+import schemas, database, models
 from fastapi import Depends, status, HTTPException
 from sqlalchemy.orm import Session
 

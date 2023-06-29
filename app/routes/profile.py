@@ -1,9 +1,9 @@
-from .. import models, schemas
+import models, schemas
 from fastapi import FastAPI, status, HTTPException, Depends, APIRouter
-from ..database import get_db
-from .. import models, utils, schemas
+from database import get_db
+import models, utils, schemas
 from sqlalchemy.orm import Session
-from  .. import Oauth2
+import Oauth2
 
 profile_router = APIRouter(
     prefix="/users/profile",

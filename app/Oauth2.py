@@ -2,8 +2,8 @@ from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from sqlalchemy.orm import Session
-from .config import settings
-from . import schemas, database, models
+from config import settings
+import schemas, database, models
 from fastapi import Depends, status, HTTPException
 
 SECRET_KEY = settings.authjwt_secret_key
